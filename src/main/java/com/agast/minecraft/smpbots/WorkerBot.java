@@ -28,6 +28,9 @@ final class WorkerBot {
     private final int woodSearchRadius;
     private final double moveBlocksPerAction;
     private final double mineReach;
+    private Block currentWoodTarget;
+    private int woodBreakProgress = 0;
+    private final int woodBreakActions;
 
     private BotTool tool;
     private BotPhase phase = BotPhase.COLLECTING_WOOD;
@@ -45,6 +48,7 @@ final class WorkerBot {
         this.woodSearchRadius = Math.max(4, plugin.getConfig().getInt("wood-search-radius", 32));
         this.moveBlocksPerAction = Math.max(0.1, plugin.getConfig().getDouble("move-blocks-per-action", 1.25));
         this.mineReach = Math.max(1.0, plugin.getConfig().getDouble("mine-reach", 3.2));
+        this.woodBreakActions = Math.max(1, plugin.getConfig().getInt("wood-break-actions", 6));
         this.scanner = new TargetScanner(home, radius);
         this.stand = spawnStand(home);
         refreshName();
@@ -105,20 +109,35 @@ final class WorkerBot {
         if (craftUntilReadyToMine()) {
             phase = BotPhase.MINING;
             currentTarget = null;
+            currentWoodTarget = null;
+            woodBreakProgress = 0;
             return;
         }
 
-        Block log = findNearestLog();
-        if (log == null) {
+        if (currentWoodTarget == null || !Tag.LOGS.isTagged(currentWoodTarget.getType())) {
+            currentWoodTarget = findNearestLog();
+            woodBreakProgress = 0;
+        }
+
+        if (currentWoodTarget == null) {
             return;
         }
 
-        if (!moveWithinReach(log.getLocation().add(0.5, 0.5, 0.5))) {
+        if (!moveWithinReach(currentWoodTarget.getLocation().add(0.5, 0.5, 0.5))) {
+            woodBreakProgress = 0;
             return;
         }
 
-        log.setType(Material.AIR);
+        woodBreakProgress++;
+        if (woodBreakProgress < woodBreakActions) {
+            return;
+        }
+
+        currentWoodTarget.setType(Material.AIR);
         inventory.logs++;
+
+        currentWoodTarget = null;
+        woodBreakProgress = 0;
     }
 
     private void miningTick() {

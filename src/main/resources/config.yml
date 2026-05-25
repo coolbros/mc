@@ -11,6 +11,7 @@ default-quarry-radius: 48
 move-blocks-per-action: 1.25
 mine-reach: 3.2
 wood-search-radius: 32
+wood-break-actions: 6
 
 # Vertical quarry limits. Values are clamped to the world's actual min/max height.
 scan-min-y: -64
