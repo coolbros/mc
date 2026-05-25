@@ -1,0 +1,10 @@
+{
+  "pack": {
+    "pack_format": 48,
+    "supported_formats": {
+      "min_inclusive": 41,
+      "max_inclusive": 999
+    },
+    "description": "SMP worker bots: command-driven miners for Aternos-compatible worlds"
+  }
+}

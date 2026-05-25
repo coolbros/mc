@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "id": "smpfreebot",
+  "version": "1.0.0",
+  "name": "SMP Free Bot",
+  "description": "Free client-side SMP helper bot for chopping and mining.",
+  "authors": [
+    "agast + Codex"
+  ],
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.agast.minecraft.freebot.SmpFreeBotClient"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.19.2",
+    "minecraft": "26.1.2",
+    "java": ">=25"
+  }
+}

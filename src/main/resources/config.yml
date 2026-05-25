@@ -1,0 +1,20 @@
+# How often each bot acts, in server ticks. 20 ticks = 1 second.
+tick-interval: 10
+
+# Maximum blocks checked by a bot per action while searching its quarry.
+blocks-per-tick: 700
+
+# Default radius for /smpbot spawn when no radius is provided.
+default-quarry-radius: 48
+
+# Bot movement and mining behavior.
+move-blocks-per-action: 1.25
+mine-reach: 3.2
+wood-search-radius: 32
+
+# Vertical quarry limits. Values are clamped to the world's actual min/max height.
+scan-min-y: -64
+scan-max-y: 320
+
+# Mine regular stone as well as iron ore. Turn this off if you only want iron mining.
+mine-stone: true

@@ -1,0 +1,9 @@
+build/
+.gradle/
+out/
+target/
+*.class
+*.jar
+*.log
+*.zip
+downloads/

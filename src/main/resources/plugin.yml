@@ -1,0 +1,15 @@
+name: SMPWorkerBots
+version: ${version}
+main: com.agast.minecraft.smpbots.SmpWorkerBotsPlugin
+api-version: '${apiVersion}'
+author: agast
+description: Server-side worker bots that gather wood, craft pickaxes, and mine stone and iron.
+commands:
+  smpbot:
+    description: Manage SMP worker bots.
+    usage: /smpbot <spawn|start|stop|status|remove>
+    permission: smpbots.admin
+permissions:
+  smpbots.admin:
+    description: Allows managing SMP worker bots.
+    default: op
